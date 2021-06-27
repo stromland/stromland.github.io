@@ -1,6 +1,6 @@
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError } from 'axios';
 
-export interface MardownResponse {
+export interface MarkdownResponse {
   content?: string;
   error?: {
     message: string;
@@ -9,7 +9,7 @@ export interface MardownResponse {
 }
 
 export class MarkdownClient {
-  public async fetchDocument(path: string): Promise<MardownResponse> {
+  public async fetchDocument(path: string): Promise<MarkdownResponse> {
     try {
       const res = await axios.get<string>(`/docs${path}`);
       return {

@@ -1,16 +1,14 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
-import { MarkdownClient, MardownResponse } from "../clients/MarkdownClient";
+import { MarkdownClient, MarkdownResponse } from '../clients/MarkdownClient';
 
-interface MarkdownState {
+type MarkdownState = MarkdownResponse & {
   success: boolean;
-  content?: string;
-  error?: string;
-}
+};
 
 export function useMarkdown(): MarkdownState {
-  const [data, setData] = useState<MardownResponse>();
+  const [data, setData] = useState<MarkdownResponse>();
   const location = useLocation();
 
   useEffect(() => {
@@ -26,12 +24,12 @@ export function useMarkdown(): MarkdownState {
   return {
     success: data?.error === undefined,
     content: data?.content,
-    error: `${data?.error?.message}`,
+    error: data?.error,
   };
 }
 
 function getMarkdownName(path: string): string {
-  if (path.endsWith("/")) {
+  if (path.endsWith('/')) {
     return `${path}index.md`;
   } else {
     return `${path}.md`;
