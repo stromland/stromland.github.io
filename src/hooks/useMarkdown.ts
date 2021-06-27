@@ -14,9 +14,7 @@ export function useMarkdown(): MarkdownState {
   useEffect(() => {
     (async () => {
       const client = new MarkdownClient();
-      const data = await client.fetchDocument(
-        getMarkdownName(location.pathname)
-      );
+      const data = await client.getDocumentForPath(location.pathname);
       setData(data);
     })();
   }, [location.pathname]);
@@ -26,12 +24,4 @@ export function useMarkdown(): MarkdownState {
     content: data?.content,
     error: data?.error,
   };
-}
-
-function getMarkdownName(path: string): string {
-  if (path.endsWith('/')) {
-    return `${path}index.md`;
-  } else {
-    return `${path}.md`;
-  }
 }

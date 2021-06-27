@@ -4,7 +4,7 @@ import { useMarkdown } from '../hooks/useMarkdown';
 import { MarkdownRendrer } from '../components/MarkdownRendrer';
 import { NotFound } from '../components/NotFound';
 
-const HTTP_NOT_FOUND = '404';
+const HTTP_NOT_FOUND = 404;
 
 export const MarkdownViewer: FC = () => {
   const markdown = useMarkdown();
@@ -13,9 +13,9 @@ export const MarkdownViewer: FC = () => {
     return <MarkdownRendrer content={markdown.content} />;
   }
 
-  if (markdown.error?.code === HTTP_NOT_FOUND) {
+  if (markdown.error?.status === HTTP_NOT_FOUND) {
     return <NotFound />;
   }
 
-  return <h1>{markdown.error ?? 'Something went wrong'}</h1>;
+  return <h1>{markdown.error?.message ?? 'Something went wrong'}</h1>;
 };
