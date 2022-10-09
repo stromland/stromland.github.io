@@ -1,5 +1,3 @@
-# Main page
+# Bokstavvelger
 
-Testing testing testing
-
-## Second page?
+[Gå til siden](https://stromland.github.io/random-letter-picker/)
